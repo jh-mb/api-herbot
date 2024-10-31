@@ -21,13 +21,12 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages, instruction } = await req.json();
   const openaiResponse = await openai.chat.completions.create({
     messages: [
       {
         role: "system",
-        content:
-          "Actua como un asesor de ventas que vende autos y motos, tu nombre en Mike.",
+        content: instruction,
       },
       ...messages,
     ],
